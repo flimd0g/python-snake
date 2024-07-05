@@ -1,14 +1,19 @@
 from turtle import Turtle
 
 # Constant setup for snake body segments
-STARTING_POSITIONS = [0, -20, -40]
+STARTING_POSITIONS = [-10, -30, -50]
 MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 
 class Snake:
     def __init__(self):
         self.snake_body = []
         self.create_snake()
+        self.head = self.snake_body[0]
 
 
     def create_snake(self):
@@ -27,17 +32,21 @@ class Snake:
             prev_seg_pos_x = self.snake_body[seg - 1].xcor()
             prev_seg_pos_y = self.snake_body[seg - 1].ycor()
             self.snake_body[seg].goto(prev_seg_pos_x, prev_seg_pos_y)
-        self.snake_body[0].forward(MOVE_DISTANCE)
+        self.head.forward(MOVE_DISTANCE)
 
     def up(self):
-        self.snake_body[0].setheading(90)
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
 
     def down(self):
-        self.snake_body[0].setheading(270)
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
 
     def left(self):
-        self.snake_body[0].setheading(180)
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
 
     def right(self):
-        self.snake_body[0].setheading(0)
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
 
