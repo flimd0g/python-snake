@@ -1,7 +1,7 @@
 from turtle import Turtle
 
 # Constant setup for snake body segments
-STARTING_POSITIONS = [-10, -30, -50]
+STARTING_POSITIONS = [0, -20, -40]
 MOVE_DISTANCE = 20
 UP = 90
 DOWN = 270
@@ -34,6 +34,8 @@ class Snake:
             self.snake_body[seg].goto(prev_seg_pos_x, prev_seg_pos_y)
         self.head.forward(MOVE_DISTANCE)
 
+
+    # Check current heading. Stops snake from going back on itself
     def up(self):
         if self.head.heading() != DOWN:
             self.head.setheading(UP)
