@@ -1,7 +1,7 @@
 from turtle import Turtle
 
 # Constant setup for snake body segments
-STARTING_POSITIONS = [0, -20, -40]
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
 UP = 90
 DOWN = 270
@@ -19,10 +19,19 @@ class Snake:
     def create_snake(self):
         # Create 3 new Turtle object instances, position them appropriately, and add them to snake_body
         for position in STARTING_POSITIONS:
-            new_segment = Turtle(shape="square")
-            new_segment.penup()
-            new_segment.goto(x=position, y=0)
-            self.snake_body.append(new_segment)
+            self.add_segment(position)
+
+
+    def add_segment(self, position):
+        new_segment = Turtle(shape="square")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.snake_body.append(new_segment)
+
+
+    def extend(self):
+        self.add_segment(self.snake_body[-1].position())
+
 
 
     def move(self):
@@ -51,4 +60,3 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
-
