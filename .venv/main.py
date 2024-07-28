@@ -29,22 +29,24 @@ while game_is_on:
     screen.update() # Perform a TurtleScreen update
     time.sleep(0.1) # Timing control. Adjust if required
     snake.move()
+    scoreboard.update_scoreboard()
 
     # Detect collision with food
     if snake.head.distance(food) < 10:
         food.refresh()
         snake.extend()
         scoreboard.add_point()
+        scoreboard.update_scoreboard()
 
     # Detect collision with border
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        game_is_on = False
-        scoreboard.game_over()
+        snake.reset()
+        scoreboard.reset()
 
     # Detect collision with tail
     for segment in snake.snake_body[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            scoreboard.game_over()
+            snake.reset()
+            scoreboard.reset()
 
 screen.exitonclick()
